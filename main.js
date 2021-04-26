@@ -152,7 +152,11 @@ const scoreDisplay = $("#score-div");
 
 //initiated counter variable that will keep track of score
 let score = 0;
-
+const storedScore = localStorage.getItem("storedScore");
+if (storedScore !== null) {
+  score += Number(storedScore);
+  scoreDisplay.text(`Your Score: ${score}`);
+}
 //added event listener to submit button that when clicked if answer inputted by user is correct, "Correct!" will be displayed on DOM and if not correct, the correct answer will be displayed on DOM. Also score will also be displayed on DOM and will be kept on track
 submitButton.click(() => {
   if (inputAnswerText.val() === currentAnswer) {
@@ -161,17 +165,8 @@ submitButton.click(() => {
     scoreDisplay.text(`Your Score: ${score}`);
     inputAnswerText.val("");
 
-    // const storedScore = localStorage.getItem("storedScore");
-    // if (storedScore !== null) {
-    //   score = parseInt(storedScore);
-    // }
-
-    // localStorage.setItem("storedScore", score);
-    // console.log(localStorage.getItem("storedScore"));
+    localStorage.setItem("storedScore", score);
   } else {
     questionAnswerDisplay.text(currentAnswer);
   }
 });
-localStorage.removeItem("storedScore");
-
-// console.log(localStorage.getItem("storedScore"));
