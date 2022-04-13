@@ -152,7 +152,12 @@ const scoreDisplay = $("#score-div");
 
 //initiated counter variable that will keep track of score
 let score = 0;
+
+//initiate variable with value of getting local storage key name "storedScore"
 const storedScore = localStorage.getItem("storedScore");
+
+//if storedScore local storage key exist or has been set, override the original score which is default 0 and set it to the previous score
+//also display that score to the DOM
 if (storedScore !== null) {
   score += Number(storedScore);
   scoreDisplay.text(`Your Score: ${score}`);
@@ -165,6 +170,7 @@ submitButton.click(() => {
     scoreDisplay.text(`Your Score: ${score}`);
     inputAnswerText.val("");
 
+    //sets local storage key name "storedScore" and its value is the current score so that later if we refresh this stored score will be displayed
     localStorage.setItem("storedScore", score);
   } else {
     questionAnswerDisplay.text(currentAnswer);
